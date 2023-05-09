@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class Caballo extends Thread{
+    private static String caballoGanador;
+    private static int caballosTerminados;
     private static int distanciaTotal = 100; // La distancia total de la carrera
     private static int numCaballos;
     private String nombre;
@@ -39,12 +41,23 @@ public class Caballo extends Thread{
                 System.out.flush();
             }
             try {
-                Thread.sleep(1000); // Esperar un segundo antes de imprimir la siguiente línea
+                Thread.sleep(100); // Esperar un segundo antes de imprimir la siguiente línea
             } catch (InterruptedException e) {
                 // El hilo ha sido interrumpido, no hacemos nada especial
             }
         }
+        // Actualizar el caballo ganador
+        synchronized (Caballo.class) {
+            if (Caballo.caballoGanador == null) {
+                Caballo.caballoGanador = nombre;
+            }
+        }
         System.out.println(nombre + " ha llegado a la meta!");
+        // Imprimir el caballo ganador si todos los caballos han terminado la carrera
+        synchronized (Caballo.class ) {
+            if (++Caballo.caballosTerminados == numCaballos){
+                System.out.println("El caballo ganador es: "+Caballo.caballoGanador);
+            }}
     }
 
     public static void inicializarMatrizCarrera(int n) {
