@@ -1,6 +1,14 @@
 import java.util.Random;
 
 public class Caballo extends Thread{
+    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_RESET = "\u001B[0m";
+
     private static String caballoGanador;
     private static int caballosTerminados;
     private static int distanciaTotal = 100; // La distancia total de la carrera
@@ -28,7 +36,7 @@ public class Caballo extends Thread{
                 int fila = Integer.parseInt(nombre.substring(8)) - 1; // La fila que corresponde al caballo actual
                 for (int i = 0; i < distanciaTotal; i++) {
                     if (i == distanciaRecorrida) {
-                        matrizCarrera[fila][i] = '*'; // El caballo está en esta posición
+                        matrizCarrera[fila][i] = '&'; // El caballo está en esta posición
                     } else {
                         matrizCarrera[fila][i] = '-'; // No hay caballo en esta posición
                     }
@@ -36,7 +44,7 @@ public class Caballo extends Thread{
                 // Imprimir el progreso de la carrera en la consola
                 System.out.print("\033[H\033[2J"); // Limpiar la pantalla
                 for (int i = 0; i < numCaballos; i++) {
-                    System.out.println("Caballo " + (i + 1) + " " + new String(matrizCarrera[i])); // Imprimir la línea que corresponde al caballo actual
+                    System.out.println(ANSI_BLACK+"Caballo " + (i + 1) + " " +ANSI_RESET+ANSI_BLUE+ new String(matrizCarrera[i])); // Imprimir la línea que corresponde al caballo actual
                 }
                 System.out.flush();
             }
@@ -56,7 +64,7 @@ public class Caballo extends Thread{
         // Imprimir el caballo ganador si todos los caballos han terminado la carrera
         synchronized (Caballo.class ) {
             if (++Caballo.caballosTerminados == numCaballos){
-                System.out.println("El caballo ganador es: "+Caballo.caballoGanador);
+                System.out.println(ANSI_RED+"El caballo ganador es: "+Caballo.caballoGanador);
             }}
     }
 
