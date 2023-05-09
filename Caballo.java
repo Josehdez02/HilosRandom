@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Caballo {
+public class Caballo extends Thread{
     private static int distanciaTotal = 100; // La distancia total de la carrera
     private static int numCaballos;
     private String nombre;
