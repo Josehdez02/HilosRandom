@@ -34,7 +34,7 @@ public class Caballo {
                 // Imprimir el progreso de la carrera en la consola
                 System.out.print("\033[H\033[2J"); // Limpiar la pantalla
                 for (int i = 0; i < numCaballos; i++) {
-                    System.out.println("Caballo " + (i+1) + " " + new String(matrizCarrera[i])); // Imprimir la línea que corresponde al caballo actual
+                    System.out.println("Caballo " + (i + 1) + " " + new String(matrizCarrera[i])); // Imprimir la línea que corresponde al caballo actual
                 }
                 System.out.flush();
             }
@@ -46,3 +46,14 @@ public class Caballo {
         }
         System.out.println(nombre + " ha llegado a la meta!");
     }
+
+    public static void inicializarMatrizCarrera(int n) {
+        numCaballos = n;
+        matrizCarrera = new char[n][distanciaTotal];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < distanciaTotal; j++) {
+                matrizCarrera[i][j] = '-';
+            }
+        }
+    }
+}
