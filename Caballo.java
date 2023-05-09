@@ -36,3 +36,13 @@ public class Caballo {
                 for (int i = 0; i < numCaballos; i++) {
                     System.out.println("Caballo " + (i+1) + " " + new String(matrizCarrera[i])); // Imprimir la línea que corresponde al caballo actual
                 }
+                System.out.flush();
+            }
+            try {
+                Thread.sleep(1000); // Esperar un segundo antes de imprimir la siguiente línea
+            } catch (InterruptedException e) {
+                // El hilo ha sido interrumpido, no hacemos nada especial
+            }
+        }
+        System.out.println(nombre + " ha llegado a la meta!");
+    }
